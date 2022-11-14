@@ -28,3 +28,9 @@ Povolené země: `CZ`, `SK`
 Povolené formy oslovení: `VOCATIVE_FORM_INFORMAL`, `VOCATIVE_FORM_FORMAL`
 
 V případě, že znáte pohlaví, můžete jej předat jako druhý parametr do metody `analyse`.
+
+# Poděkování
+
+- https://www.behindthename.com/
+- https://github.com/Anwarvic/Behind-The-Name
+- https://github.com/granam/czech-vocative
