@@ -22,7 +22,9 @@ $result->getVocative(); // vrátí "Tomáši" (alternativně "profesore")
 ```
 
 Povolené jazyky: `cs`, `sk`
+
 Povolené země: `CZ`, `SK`
+
 Povolené formy oslovení: `VOCATIVE_FORM_INFORMAL`, `VOCATIVE_FORM_FORMAL`
 
 V případě, že znáte pohlaví, můžete jej předat jako druhý parametr do metody `analyse`.
