@@ -405,13 +405,15 @@ class FullNameAnalyserTest extends Unit
 
 	public function testResult()
 	{
-		$result = new Result('a', 'b', 'c', 'd', Result::GENDER_MALE, 'e');
+		foreach ([Result::GENDER_MALE, Result::GENDER_FEMALE] as $_gender) {
+			$result = new Result('a', 'b', 'c', 'd', $_gender, 'e');
 
-		$this->tester->assertEquals('a', $result->getTitleBefore());
-		$this->tester->assertEquals('b', $result->getFirstName());
-		$this->tester->assertEquals('c', $result->getLastName());
-		$this->tester->assertEquals('d', $result->getTitleAfter());
-		$this->tester->assertEquals(Result::GENDER_MALE, $result->getGender());
-		$this->tester->assertEquals('e', $result->getVocative());
+			$this->tester->assertEquals('a', $result->getTitleBefore());
+			$this->tester->assertEquals('b', $result->getFirstName());
+			$this->tester->assertEquals('c', $result->getLastName());
+			$this->tester->assertEquals('d', $result->getTitleAfter());
+			$this->tester->assertEquals($_gender, $result->getGender());
+			$this->tester->assertEquals('e', $result->getVocative());
+		}
 	}
 }

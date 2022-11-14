@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace ADT\FullNameAnalyser;
 
 use ADT\FullNameAnalyser\Exception\InvalidFullNameException;
+use ADT\Utils\Strings;
 use Exception;
 use Granam\CzechVocative\CzechName;
-use Nette\Utils\Strings;
 use Transliterator;
 
 final class FullNameAnalyser
@@ -57,7 +57,7 @@ final class FullNameAnalyser
 	 */
 	public function analyse(string $fullName, ?string $gender = null): ?Result
 	{
-		if (!\ADT\Utils\Strings::validateFullName($fullName)) {
+		if (!Strings::validateFullName($fullName)) {
 			throw new InvalidFullNameException('Parameter "$fullName" does not seem to be a valid full name.');
 		}
 
@@ -172,9 +172,9 @@ final class FullNameAnalyser
 	{
 		// končí-li příjmení na "ová" nebo "ova", s největší pravděpodobností to bude žena
 		if (
-			Strings::endsWith($lastName, 'ová')
+			$this->endsWith($lastName, 'ová')
 			||
-			Strings::endsWith($lastName, 'ova')
+			$this->endsWith($lastName, 'ova')
 		) {
 			return self::GENDER_FEMALE;
 		}
@@ -251,5 +251,10 @@ final class FullNameAnalyser
 		}
 
 		return false;
+	}
+
+	private function endsWith(string $haystack, string $needle): bool
+	{
+		return mb_substr($haystack, -mb_strlen($needle)) === $needle;
 	}
 }

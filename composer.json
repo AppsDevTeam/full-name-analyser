@@ -14,8 +14,7 @@
         "php": ">=7.4",
         "ext-intl": "*",
         "adt/utils": "^2.0",
-        "granam/czech-vocative": "^2.2",
-        "nette/utils": "^3.2"
+        "granam/czech-vocative": "^2.2"
     },
     "require-dev": {
         "codeception/codeception": "^4.2",

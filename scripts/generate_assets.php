@@ -9,7 +9,7 @@ if (($handle = fopen(__DIR__  . "/crawler/dataset2.csv", "r")) !== FALSE) {
 		$name = $data[3];
 
 		// for example "Toma  (1)"
-		$name = trim(preg_replace("/\([0-9]+\)$/", "", $name));
+		$name = trim(preg_replace("/ [0-9]+$/", "", $name));
 
 		// TOMÁŠ to Tomáš
 		$name = mb_convert_case($name, MB_CASE_TITLE);
