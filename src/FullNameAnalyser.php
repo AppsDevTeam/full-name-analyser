@@ -170,9 +170,9 @@ final class FullNameAnalyser
 
 	private function getGender(?string $firstName, string $lastName, $strict): ?string
 	{
-		// končí-li příjmení na "ová" nebo "ova", s největší pravděpodobností to bude žena
+		// končí-li příjmení na "á" nebo "ova", s největší pravděpodobností to bude žena
 		if (
-			$this->endsWith($lastName, 'ová')
+			$this->endsWith($lastName, 'á')
 			||
 			$this->endsWith($lastName, 'ova')
 		) {
