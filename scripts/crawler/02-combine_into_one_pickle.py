@@ -17,7 +17,7 @@ name = []
 origin = []
 gender = []
 meaning = []
-for k in range(1, 83):
+for k in range(1, 84):
     file_name = "PAGES/page"+str(k)+".pickle"
     print file_name
     with open(file_name, "r") as f:

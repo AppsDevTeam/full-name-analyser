@@ -37,7 +37,7 @@ def extract_info(parsed):
         origin.append(temp)
         meaning.append(i.get_text())
 
-for k in range(1, 83):
+for k in range(1, 84):
 	name = []
 	gender = []
 	origin = []

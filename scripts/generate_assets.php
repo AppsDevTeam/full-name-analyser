@@ -1,5 +1,7 @@
 <?php
 
+$transliterator = Transliterator::create('Any-Latin; Latin-ASCII');
+
 $maleNames = [];
 $asciiMaleNames = [];
 $femaleNames = [];
@@ -18,7 +20,7 @@ if (($handle = fopen(__DIR__  . "/crawler/dataset2.csv", "r")) !== FALSE) {
 		$lowercasedName = mb_strtolower($name);
 
 		// remove accents for alternative matching
-		$lowercasedAsciiName = Transliterator::create('Any-Latin; Latin-ASCII')->transliterate($lowercasedName);
+		$lowercasedAsciiName = $transliterator->transliterate($lowercasedName);
 
 		if (strstr($data[1], 'm') !== false) {
 			$maleNames[$lowercasedName] = true;
@@ -30,6 +32,108 @@ if (($handle = fopen(__DIR__  . "/crawler/dataset2.csv", "r")) !== FALSE) {
 		}
 	}
 	fclose($handle);
+}
+
+if (($handle = fopen(__DIR__  . "/kalendar-online/female.txt", "r")) !== FALSE) {
+	while (($name = fgets($handle)) !== false) {
+		$name = trim($name);
+
+		if (in_array($name, [
+			'Ota',
+			'Ilja',
+			'Vojta',
+			'Attila',
+			'Karim',
+			'Luka',
+			'Ricardo',
+			'Riccardo',
+			'Daniele',
+			'Mykola',
+			'Atila',
+			'Csaba',
+			'Ilija',
+			'Ivica',
+			'Mustafa',
+			'Géza',
+			'Renato',
+			'Nicolae',
+			'Juda',
+			'Honza',
+		])) {
+			continue;
+		}
+
+		$lowercasedName = mb_strtolower($name);
+
+		if (!isset($femaleNames[$lowercasedName])) {
+			$femaleNames[$lowercasedName] = true;
+			$asciiFemaleNames[$transliterator->transliterate($lowercasedName)] = true;
+		}
+	}
+
+	fclose($handle);
+}
+
+if (($handle = fopen(__DIR__  . "/kalendar-online/male.txt", "r")) !== FALSE) {
+	while (($name = fgets($handle)) !== false) {
+		$name = trim($name);
+
+		if (in_array($name, [
+			'Petr (stol.)',
+			'Natálie',
+			'Ingeborg',
+			'Zoe',
+			'Doris',
+			'Edith',
+			'Waltraud',
+			'Eleni',
+			'Janis',
+			'Agnes',
+			'Hildegard',
+			'Annelies',
+			'Ilse',
+			'Niki',
+			'Gerlinde',
+			'Annette',
+			'Anneliese',
+			'Esther',
+			'Gertrud',
+			'Lieselotte',
+			'Vasiliki',
+			'Dolores',
+			'Gertraud',
+			'Gudrun',
+			'Heidrun',
+			'Edit',
+			'Sigrid',
+			'Waltraut',
+			'Chantal',
+			'Elke',
+			'Erzsébet',
+			'Liv',
+			'Brit',
+		])) {
+			continue;
+		}
+
+		$lowercasedName = mb_strtolower($name);
+
+		if (!isset($maleNames[$lowercasedName])) {
+			$maleNames[$lowercasedName] = true;
+			$asciiMaleNames[$transliterator->transliterate($lowercasedName)] = true;
+		}
+	}
+
+	fclose($handle);
+}
+
+foreach (['Žanet'] as $name) {
+	$lowercasedName = mb_strtolower($name);
+
+	if (!isset($femaleNames[$lowercasedName])) {
+		$femaleNames[$lowercasedName] = true;
+		$asciiFemaleNames[$transliterator->transliterate($lowercasedName)] = true;
+	}
 }
 
 file_put_contents(__DIR__ . '/../src/assets/male_first_name.php', "<?php return " . var_export($maleNames, true) . ';');
